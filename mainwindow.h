@@ -26,6 +26,14 @@ private slots:
 
     void on_pageJumpButton_clicked();
 
+    void on_zoomInButton_clicked();
+
+    void on_zoomOutButton_clicked();
+
+    void on_zoomResetButton_clicked();
+
+    void setImageForPage();
+
 private:
     Ui::MainWindow *ui;
     ImageLoader imageloader;

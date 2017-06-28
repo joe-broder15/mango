@@ -15,13 +15,20 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->pageDisplay->setDragMode(QGraphicsView::ScrollHandDrag);
     ui->pageDisplay->setAlignment(Qt::AlignCenter | Qt::AlignTop);
     QWidget::showMaximized();
-
-
 }
 
 MainWindow::~MainWindow()
 {
     delete ui;
+}
+
+void MainWindow::setImageForPage()
+{
+    scene->clear();
+    scene->addPixmap(imageloader.getPage(imageloader.getCurrentPage()));
+    scene->setSceneRect(0, 0, imageloader.getPage(imageloader.getCurrentPage()).width(),
+                       imageloader.getPage(imageloader.getCurrentPage()).height());
+    ui->pageDisplay->setScene(scene);
 }
 
 void MainWindow::on_getMangaButton_clicked()
@@ -30,11 +37,7 @@ void MainWindow::on_getMangaButton_clicked()
     imageloader.loadBook(QFileDialog::getExistingDirectory());
     imageloader.setCurrentPage(0);
     ui->pageLabel->setText("1/" + QString::number(imageloader.getLength()));
-    scene->clear();
-    QPixmap pic(imageloader.getPage(imageloader.getCurrentPage()));
-    scene->addPixmap(pic);
-    scene->setSceneRect(0, 0, pic.width(), pic.height());
-    ui->pageDisplay->setScene(scene);
+    this->setImageForPage();
 }
 
 void MainWindow::on_nextPageButton_clicked()
@@ -48,11 +51,7 @@ void MainWindow::on_nextPageButton_clicked()
         int currentPage = imageloader.getCurrentPage() + 1;
         imageloader.setCurrentPage(currentPage);
         ui->pageLabel->setText(QString::number(currentPage + 1) + "/" + QString::number(imageloader.getLength()));
-        scene->clear();
-        QPixmap pic(imageloader.getPage(imageloader.getCurrentPage()));
-        scene->addPixmap(pic);
-        scene->setSceneRect(0, 0, pic.width(), pic.height());
-        ui->pageDisplay->setScene(scene);
+        this->setImageForPage();
     }
 }
 
@@ -68,11 +67,7 @@ void MainWindow::on_previousPageButton_clicked()
         int currentPage = imageloader.getCurrentPage() - 1;
         imageloader.setCurrentPage(currentPage);
         ui->pageLabel->setText(QString::number(currentPage+1) + "/" + QString::number(imageloader.getLength()));
-        scene->clear();
-        QPixmap pic(imageloader.getPage(imageloader.getCurrentPage()));
-        scene->addPixmap(pic);
-        scene->setSceneRect(0, 0, pic.width(), pic.height());
-        ui->pageDisplay->setScene(scene);
+        this->setImageForPage();
     }
 }
 
@@ -88,10 +83,25 @@ void MainWindow::on_pageJumpButton_clicked()
         int currentPage = ui->pageJumpLineEdit->text().toInt() - 1;
         imageloader.setCurrentPage(currentPage);
         ui->pageLabel->setText(QString::number(currentPage+1) + "/" + QString::number(imageloader.getLength()));
-        scene->clear();
-        QPixmap pic(imageloader.getPage(imageloader.getCurrentPage()));
-        scene->addPixmap(pic);
-        scene->setSceneRect(0, 0, pic.width(), pic.height());
-        ui->pageDisplay->setScene(scene);
+        this->setImageForPage();
     }
+}
+
+void MainWindow::on_zoomInButton_clicked()
+{
+    imageloader.increaseScaleFactor();
+    this->setImageForPage();
+}
+
+void MainWindow::on_zoomOutButton_clicked()
+{
+    imageloader.decreaseScaleFactor();
+    this->setImageForPage();
+
+}
+
+void MainWindow::on_zoomResetButton_clicked()
+{
+    imageloader.setScaleFactor(1);
+    this->setImageForPage();
 }

@@ -4,6 +4,7 @@
 #include <QString>
 #include <vector>
 #include <QDir>
+#include <QPixmap>
 using namespace std;
 
 class ImageLoader
@@ -11,7 +12,7 @@ class ImageLoader
 public:
     void loadBook(QString path);
 
-    QString getPage(int pageNumber);
+    QPixmap getPage(int pageNumber);
 
     int getCurrentPage();
 
@@ -19,9 +20,16 @@ public:
 
     void setCurrentPage(int page);
 
+    void increaseScaleFactor();
+
+    void decreaseScaleFactor();
+
+    void setScaleFactor(double newFactor);
+
 private:
     int currentPage;
-    vector<QString> pages;
+    vector<QPixmap> pages;
+    double scaleFactor = 1;
 
 
 };

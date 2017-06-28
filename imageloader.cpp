@@ -10,13 +10,15 @@ void ImageLoader::loadBook(QString path){
 
     foreach (QFileInfo var, dir.entryInfoList()) {
          if(!var.isDir()){
-             pages.push_back(var.absoluteFilePath());
+             pages.push_back(QPixmap(var.absoluteFilePath()));
          }
     }
 }
 
-QString ImageLoader::getPage(int pageNumber){
-    return pages.at(pageNumber);
+QPixmap ImageLoader::getPage(int pageNumber){
+    QPixmap p = pages.at(pageNumber);
+    p = p.scaled(scaleFactor * p.size());
+    return p;
 }
 
 int ImageLoader::getCurrentPage(){
@@ -29,5 +31,18 @@ void ImageLoader::setCurrentPage(int page){
 
 int ImageLoader::getLength(){
     return pages.size();
+}
+
+void ImageLoader::increaseScaleFactor(){
+    scaleFactor += .1;
+}
+
+void ImageLoader::decreaseScaleFactor(){
+    scaleFactor -= .1;
+
+}
+
+void ImageLoader::setScaleFactor(double newScaleFactor){
+    scaleFactor = newScaleFactor;
 }
 
