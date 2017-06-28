@@ -14,6 +14,11 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->setupUi(this);
     ui->pageDisplay->setDragMode(QGraphicsView::ScrollHandDrag);
     ui->pageDisplay->setAlignment(Qt::AlignCenter | Qt::AlignTop);
+    ui->pageDisplay->setContentsMargins(0,0,0,0);
+    centralWidget()->layout()->setContentsMargins(0,0,0,0);
+    statusBar()->hide();
+    ui->mainToolBar->hide();
+
     QWidget::showMaximized();
 }
 
