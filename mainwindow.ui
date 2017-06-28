@@ -133,14 +133,14 @@
         <item>
          <layout class="QHBoxLayout" name="horizontalLayout_5">
           <item>
-           <widget class="QPushButton" name="pushButton">
+           <widget class="QPushButton" name="firstPageButton">
             <property name="text">
              <string>First Page</string>
             </property>
            </widget>
           </item>
           <item>
-           <widget class="QPushButton" name="pushButton_2">
+           <widget class="QPushButton" name="lastPageButton">
             <property name="text">
              <string>Last Page</string>
             </property>

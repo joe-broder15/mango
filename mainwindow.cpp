@@ -97,11 +97,24 @@ void MainWindow::on_zoomOutButton_clicked()
 {
     imageloader.decreaseScaleFactor();
     this->setImageForPage();
-
 }
 
 void MainWindow::on_zoomResetButton_clicked()
 {
     imageloader.setScaleFactor(1);
+    this->setImageForPage();
+}
+
+void MainWindow::on_firstPageButton_clicked()
+{
+    imageloader.setCurrentPage(0);
+    ui->pageLabel->setText("0/" + QString::number(imageloader.getLength()));
+    this->setImageForPage();
+}
+
+void MainWindow::on_lastPageButton_clicked()
+{
+    imageloader.setCurrentPage(imageloader.getLength() - 1);
+    ui->pageLabel->setText(QString::number(imageloader.getLength()) + "/" + QString::number(imageloader.getLength()));
     this->setImageForPage();
 }

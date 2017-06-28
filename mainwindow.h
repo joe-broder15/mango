@@ -34,6 +34,10 @@ private slots:
 
     void setImageForPage();
 
+    void on_firstPageButton_clicked();
+
+    void on_lastPageButton_clicked();
+
 private:
     Ui::MainWindow *ui;
     ImageLoader imageloader;
