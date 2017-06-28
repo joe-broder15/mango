@@ -3,6 +3,7 @@
 
 #include "imageloader.h"
 #include <QMainWindow>
+#include <QGraphicsScene>
 
 namespace Ui {
 class MainWindow;
@@ -28,6 +29,7 @@ private slots:
 private:
     Ui::MainWindow *ui;
     ImageLoader imageloader;
+    QGraphicsScene * scene = new QGraphicsScene(this);
 };
 
 #endif // MAINWINDOW_H
