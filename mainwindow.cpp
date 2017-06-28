@@ -4,6 +4,7 @@
 #include <QPixmap>
 #include <QMessageBox>
 #include <qDebug>
+#include <QFileDialog>
 // /Users/admin/Desktop/testManga
 
 MainWindow::MainWindow(QWidget *parent) :
@@ -11,7 +12,9 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+    ui->scrollArea->setFrameShape(QFrame::NoFrame);
     QWidget::showMaximized();
+
 
 }
 
@@ -22,12 +25,13 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_getMangaButton_clicked()
 {
-    imageloader.loadBook(ui->getMangaLineEdit->text());
+
+    imageloader.loadBook(QFileDialog::getExistingDirectory());
     imageloader.setCurrentPage(0);
     ui->pageLabel->setText("1/" + QString::number(imageloader.getLength()));
 
     QPixmap pic(imageloader.getPage(0));
-    ui->pageDisplay->setPixmap(pic.scaled(ui->pageDisplay->size(), Qt::KeepAspectRatio, Qt::SmoothTransformation));
+    ui->pageDisplay->setPixmap(pic);//.scaled(ui->pageDisplay->size(), Qt::KeepAspectRatio, Qt::SmoothTransformation));
 }
 
 void MainWindow::on_nextPageButton_clicked()
@@ -71,7 +75,7 @@ void MainWindow::on_pageJumpButton_clicked()
         QMessageBox::critical(this, "Page out of range", "Page number must be greater than zero!");
         return;
     } else if(ui->pageJumpLineEdit->text().toInt() > imageloader.getLength() - 1){
-        QMessageBox::information(this, "Page out of range", "Page number must be less than or equal to" +
+        QMessageBox::information(this, "Page out of range", "Page number must be less than or equal to " +
                                  QString::number(imageloader.getLength()));
     } else {
         int currentPage = ui->pageJumpLineEdit->text().toInt() - 1;
