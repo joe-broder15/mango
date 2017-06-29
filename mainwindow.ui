@@ -14,21 +14,49 @@
    <string>MainWindow</string>
   </property>
   <widget class="QWidget" name="centralWidget">
+   <property name="styleSheet">
+    <string notr="true"/>
+   </property>
    <layout class="QHBoxLayout" name="horizontalLayout_3">
     <item>
      <widget class="QGraphicsView" name="pageDisplay">
       <property name="styleSheet">
-       <string notr="true">background-color: rgb(76, 76, 76);</string>
+       <string notr="true"/>
       </property>
      </widget>
     </item>
     <item>
      <widget class="QWidget" name="sideBarWidget" native="true">
+      <property name="autoFillBackground">
+       <bool>false</bool>
+      </property>
+      <property name="styleSheet">
+       <string notr="true"/>
+      </property>
       <layout class="QVBoxLayout" name="verticalLayout">
+       <property name="spacing">
+        <number>0</number>
+       </property>
        <item>
         <layout class="QVBoxLayout" name="sideBarLayout">
          <item>
           <widget class="QPushButton" name="getMangaButton">
+           <property name="styleSheet">
+            <string notr="true">QPushButton#evilButton {
+    background-color: red;
+    border-style: outset;
+    border-width: 2px;
+    border-radius: 10px;
+    border-color: beige;
+    font: bold 14px;
+    min-width: 10em;
+    padding: 6px;
+}
+QPushButton#evilButton:pressed {
+    background-color: rgb(224, 0, 0);
+    border-style: inset;
+}</string>
+           </property>
            <property name="text">
             <string>Select Manga</string>
            </property>
@@ -52,6 +80,9 @@
          </item>
          <item>
           <widget class="QLabel" name="label">
+           <property name="styleSheet">
+            <string notr="true"/>
+           </property>
            <property name="text">
             <string>Zoom</string>
            </property>

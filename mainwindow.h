@@ -18,6 +18,7 @@ public:
     ~MainWindow();
 
 private slots:
+    //Methods for ui events
     void on_getMangaButton_clicked();
 
     void on_nextPageButton_clicked();
@@ -32,15 +33,20 @@ private slots:
 
     void on_zoomResetButton_clicked();
 
-    void setImageForPage();
-
     void on_firstPageButton_clicked();
 
     void on_lastPageButton_clicked();
 
+    //Method to set page image to that for the current page
+    void setImageForPage();
+
 private:
     Ui::MainWindow *ui;
+
+    //imageloader object
     ImageLoader imageloader;
+
+    //scene for graphics widget
     QGraphicsScene * scene = new QGraphicsScene(this);
 };
 
