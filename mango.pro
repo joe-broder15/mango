@@ -26,11 +26,15 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += \
         main.cpp \
         mainwindow.cpp \
-    imageloader.cpp
+    imageloader.cpp \
+    book.cpp \
+    bookloader.cpp
 
 HEADERS += \
         mainwindow.h \
-    imageloader.h
+    imageloader.h \
+    book.h \
+    bookloader.h
 
 FORMS += \
         mainwindow.ui
