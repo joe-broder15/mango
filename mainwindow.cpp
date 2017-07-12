@@ -31,11 +31,13 @@ MainWindow::MainWindow(QWidget *parent) :
 
     //Maximize window on startup
     QWidget::showMaximized();
+
 }
 
 //Destructor for main window
 MainWindow::~MainWindow()
 {
+    bookLoader.saveBooks();
     delete ui;
 }
 

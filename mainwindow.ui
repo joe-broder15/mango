@@ -34,54 +34,15 @@
        </sizepolicy>
       </property>
       <property name="currentIndex">
-       <number>0</number>
+       <number>1</number>
       </property>
       <widget class="QWidget" name="tab">
        <attribute name="title">
-        <string>Tab 1</string>
+        <string>Read</string>
        </attribute>
        <layout class="QVBoxLayout" name="verticalLayout_2">
         <item>
          <layout class="QVBoxLayout" name="sideBarLayout">
-          <item>
-           <widget class="QPushButton" name="getMangaButton">
-            <property name="styleSheet">
-             <string notr="true">QPushButton#evilButton {
-    background-color: red;
-    border-style: outset;
-    border-width: 2px;
-    border-radius: 10px;
-    border-color: beige;
-    font: bold 14px;
-    min-width: 10em;
-    padding: 6px;
-}
-QPushButton#evilButton:pressed {
-    background-color: rgb(224, 0, 0);
-    border-style: inset;
-}</string>
-            </property>
-            <property name="text">
-             <string>Select Manga</string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <spacer name="verticalSpacer_2">
-            <property name="orientation">
-             <enum>Qt::Vertical</enum>
-            </property>
-            <property name="sizeType">
-             <enum>QSizePolicy::Fixed</enum>
-            </property>
-            <property name="sizeHint" stdset="0">
-             <size>
-              <width>20</width>
-              <height>10</height>
-             </size>
-            </property>
-           </spacer>
-          </item>
           <item>
            <widget class="QLabel" name="label">
             <property name="styleSheet">
@@ -215,11 +176,32 @@ QPushButton#evilButton:pressed {
       </widget>
       <widget class="QWidget" name="tab_2">
        <attribute name="title">
-        <string>Tab 2</string>
+        <string>Books</string>
        </attribute>
        <layout class="QVBoxLayout" name="verticalLayout">
         <item>
-         <widget class="QListView" name="listView"/>
+         <widget class="QPushButton" name="addMangaButton">
+          <property name="text">
+           <string>Add Manga</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="deleteMangaButton">
+          <property name="text">
+           <string>Delete Manga</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="selectMangaButton">
+          <property name="text">
+           <string>Select Manga</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QListView" name="mangaListView"/>
         </item>
        </layout>
       </widget>

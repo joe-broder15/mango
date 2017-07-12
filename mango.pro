@@ -29,16 +29,19 @@ SOURCES += \
         mainwindow.cpp \
     imageloader.cpp \
     book.cpp \
-    bookloader.cpp
+    bookloader.cpp \
+    addmangawindow.cpp
 
 HEADERS += \
         mainwindow.h \
     imageloader.h \
     book.h \
-    bookloader.h
+    bookloader.h \
+    addmangawindow.h
 
 FORMS += \
-        mainwindow.ui
+        mainwindow.ui \
+    addmangawindow.ui
 
 RESOURCES += \
     resource.qrc

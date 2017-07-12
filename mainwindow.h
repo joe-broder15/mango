@@ -40,8 +40,6 @@ private slots:
 
     void on_lastPageButton_clicked();
 
-    //Method to set page image to that for the current page
-    void setImageForPage();
 
 private:
     Ui::MainWindow *ui;
