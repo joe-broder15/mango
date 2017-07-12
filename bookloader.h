@@ -40,6 +40,9 @@ public:
     void loadBooks();
     void saveBooks();
 
+    //Performs bubble sort on books vector
+    void sortBooks();
+
 
 private:
 

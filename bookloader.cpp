@@ -98,11 +98,13 @@ void BookLoader::deleteBook(QString SeriesName, int BookNumber){
 void BookLoader::addBook(QString Path, QString Series, int BookNumber){
     Book b(BookNumber, Path, Series);
     books.push_back(b);
+    BookLoader::sortBooks();
 }
 
 //Add book for book object
 void BookLoader::addBook(Book book){
     books.push_back(book);
+    BookLoader::sortBooks();
 }
 
 //Get all books
@@ -135,8 +137,26 @@ int BookLoader::getSize(){
     return (int)(books.size());
 }
 
+//Sort Books via bubble sort
+void BookLoader::sortBooks(){
+    int i, j;
+    int n = (int)(books.size());
+    for (i = 0; i < n-1; i++)
+        // Last i elements are already in place
+        for (j = 0; j < n-i-1; j++){
+            if (books[j].getTitle() > books[j+1].getTitle()){
+               Book temp = books[j];
+               books[j] = books[j+1];
+               books[j+1] = temp;
+            }
+        }
+}
+
 //Save books
 void BookLoader::saveBooks(){
+
+    //Sort
+    BookLoader::sortBooks();
 
     //Create and open file to save data
     QDir dir = QDir::root();
@@ -196,6 +216,7 @@ void BookLoader::loadBooks(){
     QString tempPath;
     int tempBookMark;
 
+    //Loop through lines and set info for line
     while (!stream.atEnd())
     {
         QString line = stream.readLine();
