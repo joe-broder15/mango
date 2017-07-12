@@ -2,6 +2,8 @@
 #define MAINWINDOW_H
 
 #include "imageloader.h"
+#include "book.h"
+#include "bookloader.h"
 #include <QMainWindow>
 #include <QGraphicsScene>
 
@@ -46,6 +48,7 @@ private:
 
     //imageloader object
     ImageLoader imageloader;
+    BookLoader bookLoader;
 
     //scene for graphics widget
     QGraphicsScene * scene = new QGraphicsScene(this);

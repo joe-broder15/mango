@@ -9,6 +9,9 @@ Book::Book(int BookNumber, QString p, QString Series)
     bookNumber = BookNumber;
     series = Series;
     bookMark = 0;
+    currentPage = 0;
+
+    title = series + " " + QString::number(bookNumber);
 
     //Create a directory object for the given path
     path = p;
@@ -20,6 +23,17 @@ Book::Book(int BookNumber, QString p, QString Series)
          }
     }
 
+}
+
+//Blank Constructor
+Book::Book()
+{
+    series = "";
+    bookNumber = 0;
+    currentPage = 0;
+    bookMark = 0;
+    path = "";
+    title = "";
 }
 
 //Returns image for page
@@ -93,4 +107,16 @@ void Book::setPath(QString Path)
 int Book::getSize()
 {
     return pages.size();
+}
+
+//Get title
+QString Book::getTitle()
+{
+    return title;
+}
+
+//Set title
+void Book::setTitle(QString newTitle)
+{
+    title = newTitle;
 }
