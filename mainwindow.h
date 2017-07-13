@@ -28,6 +28,8 @@ private slots:
 
     void on_deleteMangaButton_clicked();
 
+    void on_selectMangaButton_clicked();
+
 private:
     Ui::MainWindow *ui;
 
@@ -35,6 +37,7 @@ private:
     BookLoader bookLoader;
 
     //scene for graphics widget
+    QGraphicsScene * scene = new QGraphicsScene;
 
 };
 

@@ -30,7 +30,7 @@ public:
     void setScaleFactor(double newScale);
 
     //Get and set current book
-    void setCurrentBook(Book newBook);
+    void setCurrentBook(Book*newBook);
     Book* getCurrentBook();
 
     //Get number of books

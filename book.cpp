@@ -1,4 +1,5 @@
 #include "book.h"
+#include <QDebug>
 #include <QDir>
 #include <QPixmap>
 
@@ -19,6 +20,7 @@ Book::Book(int BookNumber, QString p, QString Series)
     //For each item in the directory, create a Pixmap (image) and push back on the vector
     foreach (QFileInfo var, dir.entryInfoList()) {
          if(!var.isDir()){
+
              pages.push_back(var.absoluteFilePath());
          }
     }
@@ -119,4 +121,15 @@ QString Book::getTitle()
 void Book::setTitle(QString newTitle)
 {
     title = newTitle;
+}
+
+//check if empty
+bool Book::empty()
+{
+    if(path.trimmed().isEmpty() && series.trimmed().isEmpty() && bookNumber==0){
+        return true;
+    } else {
+        return false;
+    }
+
 }

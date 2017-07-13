@@ -27,7 +27,7 @@ Book* BookLoader::getBook(QString SeriesName, int BookNumber){
     //get size
     int size = books.size();
 
-    for(int i=0; i <= size; i++)
+    for(int i=0; i < size; i++)
     {
         //Search for item, then create and return a pointer for it
         if(books[i].getSeries() == SeriesName && books[i].getBookNumber() == BookNumber){
@@ -35,6 +35,10 @@ Book* BookLoader::getBook(QString SeriesName, int BookNumber){
             return book;
         }
     }
+
+    //Return empty book otherwise
+    Book * book;
+    return book;
 }
 
 //Get book for title (search) BOOK MUST EXIST WITHIN BOOKS VECTOR
@@ -43,7 +47,7 @@ Book* BookLoader::getBook(QString Title){
     //get size
     int size = books.size();
 
-    for(int i=0; i <= size; i++)
+    for(int i=0; i < size; i++)
     {
         //Search for item, then create and return a pointer for it
         if(books[i].getTitle() == Title){
@@ -51,6 +55,11 @@ Book* BookLoader::getBook(QString Title){
             return book;
         }
     }
+
+    //Return empty book otherwise
+    Book * book;
+    return book;
+
 }
 
 //Remove book for index
@@ -128,8 +137,8 @@ Book* BookLoader::getCurrentBook(){
 }
 
 //Set current book
-void BookLoader::setCurrentBook(Book newBook){
-    currentBook = &newBook;
+void BookLoader::setCurrentBook(Book * newBook){
+    currentBook = newBook;
 }
 
 //Get number of books

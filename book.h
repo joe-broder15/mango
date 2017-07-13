@@ -44,6 +44,9 @@ public:
     //Set title
     void setTitle(QString newTitle);
 
+    //Check if empty
+    bool empty();
+
 private:
     vector<QString> pages;
     QString series;

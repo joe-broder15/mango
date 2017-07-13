@@ -103,3 +103,28 @@ void MainWindow::on_deleteMangaButton_clicked()
     reloadMangaList();
 
 }
+
+void MainWindow::on_selectMangaButton_clicked()
+{
+
+
+    //Get selected book
+    QModelIndex listIndex = ui->mangaListWidget->currentIndex();
+    QString selectBookTitle = listIndex.data(Qt::DisplayRole).toString();
+
+
+    if(!selectBookTitle.trimmed().isEmpty()){
+
+        //Set current book to selected book
+        bookLoader.setCurrentBook(bookLoader.getBook(selectBookTitle));
+        qDebug()<<bookLoader.getCurrentBook()->getSize();
+
+        //Clear scene and set image to graphics  view
+        scene->clear();
+        QPixmap pic = bookLoader.getCurrentBook()->getPage(0);
+        scene->addPixmap(pic);
+        scene->setSceneRect(0, 0, pic.width(), pic.height());
+        ui->pageDisplay->setScene(scene);
+    }
+
+}
