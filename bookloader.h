@@ -14,9 +14,9 @@ public:
     Book* getBook(QString SeriesName, int BookNumber);
     Book* getBook(QString Title);
 
-    //Delete Bom Methods
+    //Delete Book Methods
     void deleteBook(int index);
-    void deleteBook(QString series, int number);
+    void deleteBook(QString Title);
 
     //Add Book
     void addBook(QString Path, QString Series, int BookNumber);

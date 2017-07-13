@@ -5,7 +5,8 @@
 #include <QMessageBox>
 #include <qDebug>
 #include <QFileDialog>
-// /Users/admin/Desktop/testManga
+#include "addmangadialog.h"
+#include <QMessageBox>
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -32,6 +33,11 @@ MainWindow::MainWindow(QWidget *parent) :
     //Maximize window on startup
     QWidget::showMaximized();
 
+    //Load Books
+    bookLoader.loadBooks();
+    reloadMangaList();
+
+
 }
 
 //Destructor for main window
@@ -41,168 +47,59 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
-//Method to set page image to that for the current page
-void MainWindow::setImageForPage()
+//Load manga list
+void MainWindow::reloadMangaList()
 {
-    //Clear the current image from the scene
-    scene->clear();
+    //clear list
+    ui->mangaListWidget->clear();
 
-    //Set the current scene image to the image for the current page
-    scene->addPixmap(imageloader.getPage(imageloader.getCurrentPage()));
+    //Get books
+    vector<Book> b = bookLoader.getAllBooks();
 
-    //Set the scene to the size of the current image (for scrolling purposes)
-    scene->setSceneRect(0, 0, imageloader.getPage(imageloader.getCurrentPage()).width(),
-                       imageloader.getPage(imageloader.getCurrentPage()).height());
-
-    //Set the graphicsView scene to the one we just modified
-    ui->pageDisplay->setScene(scene);
-}
-
-//Get manga button
-void MainWindow::on_getMangaButton_clicked()
-{
-    //Open dialogue to browse for a path, then load it as a book
-    imageloader.loadBook(QFileDialog::getExistingDirectory());
-
-    //Reset current page
-    imageloader.setCurrentPage(0);
-
-    //Reset page label
-    ui->pageLabel->setText("1/" + QString::number(imageloader.getLength()));
-
-    //Set page image
-    this->setImageForPage();
-}
-
-//Next page
-void MainWindow::on_nextPageButton_clicked()
-{
-    //If there is currently no manga loaded, give a dialogue saying so
-    if(imageloader.getLength() == 0){
-        QMessageBox::critical(this, "No manga", "Please select a manga!");
-        return;
-
-    // if currently on last page, give dialogue saying so
-    } else if(imageloader.getCurrentPage() == imageloader.getLength() - 1){
-        QMessageBox::information(this, "Finished", "You have finished this manga!");
-
-    //Otherwise, show next page
-    } else {
-
-        //Increase current page by 1
-        int currentPage = imageloader.getCurrentPage() + 1;
-        imageloader.setCurrentPage(currentPage);
-
-        //Reset page label
-        ui->pageLabel->setText(QString::number(currentPage + 1) + "/" + QString::number(imageloader.getLength()));
-
-        //Set image
-        this->setImageForPage();
+    //Check if empty
+    if(!b.empty()){
+        //Load books to list
+        for(int i=0; i < (int)(b.size()); i++){
+            ui->mangaListWidget->addItem(b[i].getTitle());
+        }
     }
 }
 
-//Previous Page
-void MainWindow::on_previousPageButton_clicked()
+void MainWindow::on_addMangaButton_clicked()
 {
-    //Warning for no manga currently loaded
-    if(imageloader.getLength() == 0){
-        QMessageBox::critical(this, "No manga", "Please select a manga!");
-        return;
+    //Create dialogue
+    addMangaDialog dlg;
 
-    //Warning for current page is already first page
-    }else if(imageloader.getCurrentPage() == 0){
-        QMessageBox::critical(this, "First Page", "You are already on the first page!");
-        return;
+    //Get data for manga via dialogue
+    if (dlg.exec() == QDialog::Accepted) {
 
-    //Otherwise, show previous page
-    } else {
+        //Check if fields are empty
+        if(!dlg.getPath().trimmed().isEmpty() && !dlg.getSeries().trimmed().isEmpty() && !dlg.getBookNumber().trimmed().isEmpty()){
 
-        //Decrease Page by 1
-        int currentPage = imageloader.getCurrentPage() - 1;
-        imageloader.setCurrentPage(currentPage);
+            //Add new manga
+            bookLoader.addBook(dlg.getPath(), dlg.getSeries(), dlg.getBookNumber().toInt());
+        } else {
 
-        //Reset label
-        ui->pageLabel->setText(QString::number(currentPage+1) + "/" + QString::number(imageloader.getLength()));
+            //Send warning
+            QMessageBox::warning(this, "Warning", "All fields must be filled");
+            return;
+        }
 
-        //Set Image
-        this->setImageForPage();
+        reloadMangaList();
     }
 }
 
-//Page Jump
-void MainWindow::on_pageJumpButton_clicked()
+
+void MainWindow::on_deleteMangaButton_clicked()
 {
-    //Dialogue for no page or negative page number
-    if(ui->pageJumpLineEdit->text().toInt() < 1){
-        QMessageBox::critical(this, "Page out of range", "Page number must be greater than zero!");
-        return;
+    //Get selected title
+    QModelIndex listIndex = ui->mangaListWidget->currentIndex();
+    QString deleteBookTitle = listIndex.data(Qt::DisplayRole).toString();
 
-    //Dialogue for page too long
-    } else if(ui->pageJumpLineEdit->text().toInt() > imageloader.getLength() - 1){
-        QMessageBox::information(this, "Page out of range", "Page number must be less than or equal to " +
-                             QString::number(imageloader.getLength()));
+    //Delete book
+    bookLoader.deleteBook(deleteBookTitle);
 
-    //Otherwise jump to page
-    } else {
+    //Reload
+    reloadMangaList();
 
-        //Set Number
-        int currentPage = ui->pageJumpLineEdit->text().toInt() - 1;
-        imageloader.setCurrentPage(currentPage);
-
-        //Set Label
-        ui->pageLabel->setText(QString::number(currentPage+1) + "/" + QString::number(imageloader.getLength()));
-
-        //Reset Image
-        this->setImageForPage();
-    }
-}
-
-//Zoom in
-void MainWindow::on_zoomInButton_clicked()
-{
-    //Reload image and increase zoom
-    imageloader.increaseScaleFactor();
-    this->setImageForPage();
-}
-
-//Zoom out
-void MainWindow::on_zoomOutButton_clicked()
-{
-    //Reload image and decrease zoom
-    imageloader.decreaseScaleFactor();
-    this->setImageForPage();
-}
-
-//Reset Zoom
-void MainWindow::on_zoomResetButton_clicked()
-{
-    //Reload image and set zoom to 1
-    imageloader.setScaleFactor(1);
-    this->setImageForPage();
-}
-
-//First Page
-void MainWindow::on_firstPageButton_clicked()
-{
-    //Set Page
-    imageloader.setCurrentPage(0);
-
-    //Set Label
-    ui->pageLabel->setText("0/" + QString::number(imageloader.getLength()));
-
-    //Set Image
-    this->setImageForPage();
-}
-
-//Last Page
-void MainWindow::on_lastPageButton_clicked()
-{
-    //Set Page
-    imageloader.setCurrentPage(imageloader.getLength() - 1);
-
-    //Set Label
-    ui->pageLabel->setText(QString::number(imageloader.getLength()) + "/" + QString::number(imageloader.getLength()));
-
-    //Set Image
-    this->setImageForPage();
 }

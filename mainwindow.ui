@@ -201,7 +201,7 @@
          </widget>
         </item>
         <item>
-         <widget class="QListView" name="mangaListView"/>
+         <widget class="QListWidget" name="mangaListWidget"/>
         </item>
        </layout>
       </widget>

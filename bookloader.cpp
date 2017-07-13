@@ -60,7 +60,7 @@ void BookLoader::deleteBook(int index){
     int size = books.size();
 
     //Copy items forward
-    for(int i = index; i <= size; i++)
+    for(int i = index; i<size -1; i++)
     {
         books[i] = books[i + 1];
     }
@@ -70,19 +70,19 @@ void BookLoader::deleteBook(int index){
 }
 
 //Remove book for info
-void BookLoader::deleteBook(QString SeriesName, int BookNumber){
+void BookLoader::deleteBook(QString Title){
 
     //Get size
     int size = books.size();
 
-    for(int i=0; i <= size; i++)
+    for(int i=0; i < size; i++)
     {
 
         //Search for item
-        if(books[i].getSeries() == SeriesName && books[i].getBookNumber() == BookNumber){
+        if(books[i].getTitle() == Title){
 
             //Copy it forward
-            for(int i; i<=size; i++){
+            for(int i; i<size -1; i++){
                  books[i] = books[i+1];
             }
 
