@@ -65,17 +65,7 @@ Book* BookLoader::getBook(QString Title){
 //Remove book for index
 void BookLoader::deleteBook(int index){
 
-    //Get siz3
-    int size = books.size();
-
-    //Copy items forward
-    for(int i = index; i<size -1; i++)
-    {
-        books[i] = books[i + 1];
-    }
-
-    //Remove extra last item
-    books.pop_back();
+     books.erase(books.begin() + index);
 }
 
 //Remove book for info
@@ -90,13 +80,7 @@ void BookLoader::deleteBook(QString Title){
         //Search for item
         if(books[i].getTitle() == Title){
 
-            //Copy it forward
-            for(int i; i<size -1; i++){
-                 books[i] = books[i+1];
-            }
-
-            //Pop Back and remove last item
-            books.pop_back();
+            books.erase(books.begin() + i);
             return;
 
          }

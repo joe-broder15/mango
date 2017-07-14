@@ -20,15 +20,36 @@ public:
     ~MainWindow();
 
 private slots:
-    //Methods for ui events
-    void on_addMangaButton_clicked();
 
     //Reload List
     void reloadMangaList();
 
+    //Load image for current page
+    void loadCurrentPage();
+
+    //Methods for ui events
+    void on_addMangaButton_clicked();
+
     void on_deleteMangaButton_clicked();
 
     void on_selectMangaButton_clicked();
+
+
+    void on_nextPageButton_clicked();
+
+    void on_previousPageButton_clicked();
+
+    void on_firstPageButton_clicked();
+
+    void on_lastPageButton_clicked();
+
+    void on_pageJumpButton_clicked();
+
+    void on_zoomResetButton_clicked();
+
+    void on_zoomInButton_clicked();
+
+    void on_zoomOutButton_clicked();
 
 private:
     Ui::MainWindow *ui;
