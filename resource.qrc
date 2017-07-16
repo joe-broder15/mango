@@ -1,5 +1,5 @@
 <RCC>
     <qresource prefix="/resources">
-        <file>saves/saveData.txt</file>
+        <file>mango.png</file>
     </qresource>
 </RCC>

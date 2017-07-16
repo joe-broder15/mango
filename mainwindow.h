@@ -5,6 +5,7 @@
 #include "bookloader.h"
 #include <QMainWindow>
 #include <QGraphicsScene>
+#include <QListWidgetItem>
 
 
 namespace Ui {
@@ -32,9 +33,6 @@ private slots:
 
     void on_deleteMangaButton_clicked();
 
-    void on_selectMangaButton_clicked();
-
-
     void on_nextPageButton_clicked();
 
     void on_previousPageButton_clicked();
@@ -50,6 +48,8 @@ private slots:
     void on_zoomInButton_clicked();
 
     void on_zoomOutButton_clicked();
+
+    void on_mangaListWidget_itemDoubleClicked(QListWidgetItem *item);
 
 private:
     Ui::MainWindow *ui;

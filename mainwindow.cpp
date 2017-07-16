@@ -1,6 +1,5 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
-#include "imageloader.h"
 #include <QPixmap>
 #include <QMessageBox>
 #include <qDebug>
@@ -39,8 +38,10 @@ MainWindow::MainWindow(QWidget *parent) :
     reloadMangaList();
 
     //set only numbers for manga jump text field
-    ui->pageJumpLineEdit->setValidator( new QIntValidator(0, 100, this) );
+    ui->pageJumpLineEdit->setValidator( new QIntValidator(0, 99999, this) );
 
+    //Graphics view background color
+    ui->pageDisplay->setBackgroundBrush(QBrush(Qt::gray, Qt::SolidPattern));
 
 
 }
@@ -128,30 +129,6 @@ void MainWindow::on_deleteMangaButton_clicked()
 
     //Reload
     reloadMangaList();
-
-}
-
-//Select Manga
-void MainWindow::on_selectMangaButton_clicked()
-{
-
-
-    //Get selected book
-    QModelIndex listIndex = ui->mangaListWidget->currentIndex();
-    QString selectBookTitle = listIndex.data(Qt::DisplayRole).toString();
-
-
-    if(!selectBookTitle.trimmed().isEmpty()){
-
-        //Set current book to selected book
-        bookLoader.setCurrentBook(bookLoader.getBook(selectBookTitle));
-        qDebug()<<bookLoader.getCurrentBook()->getSize();
-
-        //Clear scene and set image to graphics  view
-        bookLoader.getCurrentBook()->setCurrentPage(0);
-        loadCurrentPage();
-
-    }
 
 }
 
@@ -279,4 +256,25 @@ void MainWindow::on_zoomOutButton_clicked()
     }
     bookLoader.setScaleFactor(bookLoader.getScaleFactor() * .9);
     loadCurrentPage();
+}
+
+//Select manga
+void MainWindow::on_mangaListWidget_itemDoubleClicked(QListWidgetItem *item)
+{
+    //Get selected book
+    QModelIndex listIndex = ui->mangaListWidget->currentIndex();
+    QString selectBookTitle = listIndex.data(Qt::DisplayRole).toString();
+
+
+    if(!selectBookTitle.trimmed().isEmpty()){
+
+        //Set current book to selected book
+        bookLoader.setCurrentBook(bookLoader.getBook(selectBookTitle));
+        qDebug()<<bookLoader.getCurrentBook()->getSize();
+
+        //Clear scene and set image to graphics  view
+        bookLoader.getCurrentBook()->setCurrentPage(0);
+        loadCurrentPage();
+
+    }
 }
