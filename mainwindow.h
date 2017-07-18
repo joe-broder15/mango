@@ -49,7 +49,11 @@ private slots:
 
     void on_zoomOutButton_clicked();
 
+    void on_thumbnailListWidget_itemClicked(QListWidgetItem *item);
+
     void on_mangaListWidget_itemDoubleClicked(QListWidgetItem *item);
+
+    void on_thumbnailSplitter_splitterMoved(int pos, int index);
 
 private:
     Ui::MainWindow *ui;
@@ -59,6 +63,8 @@ private:
 
     //scene for graphics widget
     QGraphicsScene * scene = new QGraphicsScene;
+
+    bool isGalleryView = false;
 
 };
 

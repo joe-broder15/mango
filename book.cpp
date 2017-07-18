@@ -133,3 +133,8 @@ bool Book::empty()
     }
 
 }
+
+QString Book::getPathForIndex(int i)
+{
+    return pages[i];
+}

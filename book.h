@@ -47,6 +47,9 @@ public:
     //Check if empty
     bool empty();
 
+    //Get Page For Path
+    QString getPathForIndex(int Page);
+
 private:
     vector<QString> pages;
     QString series;

@@ -43,7 +43,6 @@ MainWindow::MainWindow(QWidget *parent) :
     //Graphics view background color
     ui->pageDisplay->setBackgroundBrush(QBrush(Qt::gray, Qt::SolidPattern));
 
-
 }
 
 //Destructor for main window
@@ -121,8 +120,6 @@ void MainWindow::on_deleteMangaButton_clicked()
     //Get selected title
     QModelIndex listIndex = ui->mangaListWidget->currentIndex();
     QString deleteBookTitle = listIndex.data(Qt::DisplayRole).toString();
-
-    qDebug()<<deleteBookTitle;
 
     //Delete book
     bookLoader.deleteBook(deleteBookTitle);
@@ -258,23 +255,80 @@ void MainWindow::on_zoomOutButton_clicked()
     loadCurrentPage();
 }
 
+//Thumbnail Gallery Clicked
+void MainWindow::on_thumbnailListWidget_itemClicked(QListWidgetItem *item)
+{
+    bookLoader.getCurrentBook()->setCurrentPage(item->text().toInt() - 1);
+    loadCurrentPage();
+}
+
 //Select manga
 void MainWindow::on_mangaListWidget_itemDoubleClicked(QListWidgetItem *item)
 {
     //Get selected book
-    QModelIndex listIndex = ui->mangaListWidget->currentIndex();
-    QString selectBookTitle = listIndex.data(Qt::DisplayRole).toString();
-
+    QString selectBookTitle = item->text();
 
     if(!selectBookTitle.trimmed().isEmpty()){
 
         //Set current book to selected book
         bookLoader.setCurrentBook(bookLoader.getBook(selectBookTitle));
-        qDebug()<<bookLoader.getCurrentBook()->getSize();
 
         //Clear scene and set image to graphics  view
         bookLoader.getCurrentBook()->setCurrentPage(0);
         loadCurrentPage();
 
+        //Set up thumbnail gallery
+        ui->thumbnailListWidget->clear();
+        ui->thumbnailListWidget->setViewMode(QListWidget::IconMode);
+        ui->thumbnailListWidget->setIconSize(QSize(200,200));
+        ui->thumbnailListWidget->setResizeMode(QListWidget::Adjust);
+        ui->thumbnailListWidget->setFlow(QListWidget::LeftToRight);
+
+
+        //Populate the thumbnail gallery with images
+        for(int i=0; i < bookLoader.getCurrentBook()->getSize(); i++){
+            ui->thumbnailListWidget->addItem(new QListWidgetItem(QIcon(bookLoader.getCurrentBook()->getPathForIndex(i)),
+                                                             QString::number(i+1)));
+        }
+
+
+    }
+}
+
+//Entering galleryview and scroll view based on window resizing
+void MainWindow::on_thumbnailSplitter_splitterMoved(int pos, int index)
+{
+    //Check to keep scroll view
+    if(ui->thumbnailListWidget->minimumHeight() == ui->thumbnailListWidget->height() && isGalleryView == false){
+
+        return;
+
+    //Check to keep galleryview
+    } else if(ui->thumbnailListWidget->minimumHeight() < ui->thumbnailListWidget->height() && isGalleryView == true){
+
+        return;
+    //Check to set galleryview
+    } else if(ui->thumbnailListWidget->minimumHeight() < ui->thumbnailListWidget->height() && isGalleryView == false){
+
+        //Set values(specifically wrapping)
+        ui->thumbnailListWidget->setViewMode(QListWidget::IconMode);
+        ui->thumbnailListWidget->setIconSize(QSize(200,200));
+        ui->thumbnailListWidget->setResizeMode(QListWidget::Adjust);
+        ui->thumbnailListWidget->setFlow(QListWidget::LeftToRight);
+        ui->thumbnailListWidget->setWrapping(true);
+
+        //set gallery mode to true
+        isGalleryView = true;
+
+    } else if(ui->thumbnailListWidget->minimumHeight() == ui->thumbnailListWidget->height() && isGalleryView == true){
+        //Set values(specifically wrapping)
+        ui->thumbnailListWidget->setViewMode(QListWidget::IconMode);
+        ui->thumbnailListWidget->setIconSize(QSize(200,200));
+        ui->thumbnailListWidget->setResizeMode(QListWidget::Adjust);
+        ui->thumbnailListWidget->setFlow(QListWidget::LeftToRight);
+        ui->thumbnailListWidget->setWrapping(false);
+
+        //set gallery mode to true
+        isGalleryView = false;
     }
 }
