@@ -28,6 +28,9 @@ private slots:
     //Load image for current page
     void loadCurrentPage();
 
+    //ASYNC Load thumbnails to gallery
+    void loadThumbNails();
+
     //Methods for ui events
     void on_addMangaButton_clicked();
 
