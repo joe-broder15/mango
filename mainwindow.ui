@@ -17,73 +17,7 @@
    <bool>false</bool>
   </property>
   <property name="styleSheet">
-   <string notr="true">QSplitter{
-	background-color: white;
-}
-
-QTabWidget::pane { /* The tab widget frame */
-	border-top: none;
-}
-
-/* Style the tab using the tab sub-control. Note that it reads QTabBar _not_ QTabWidget */
-QTabBar::tab {
-	background: white;
-	min-width: 8ex;
-	padding: 2px;
-
-}
-
-QTabWidget::tab-bar {
-    alignment: left;
-	background-color: white;
-}
-
-QTabBar::tab:selected{
-	
-	background-color: #FEBD8D;
-}
-
-QWidget#tab{
-	background-color: rgb(254, 189, 141);
-}
-
-QWidget#tab_2{
-	background-color: rgb(254, 189, 141);
-}
-
-QListWidget{
-	background-color: white;
-	border: none;
-	padding: 5px;
-	border-radius: 5px;
-	color: rgb(20, 20, 20);
-}
-
-
-
-QLabel{
-	color: rgb(20, 20, 20);
-}
-
-QPushButton{
-	background-color: white;
-	border: none;
-	padding: 5px;
-	border-radius: 5px;
-	color: rgb(20, 20, 20);
-}
-
-QPushButton:pressed{
-	background-color: rgb(221, 221, 221);
-}
-
-QLineEdit{
-	background-color: white;
-	border: none;
-	padding: 5px;
-	border-radius: 5px;
-	color: rgb(20, 20, 20);
-}</string>
+   <string notr="true"/>
   </property>
   <widget class="QWidget" name="centralWidget">
    <property name="styleSheet">

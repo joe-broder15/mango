@@ -175,8 +175,9 @@ void MainWindow::on_previousPageButton_clicked()
     if(bookLoader.getCurrentBook()->getBookNumber() == 0){
         QMessageBox::warning(this, "Warning", "Please select a manga!");
 
+    }
     //Check for range
-    } else if(bookLoader.getCurrentBook()->getCurrentPage() ==0){
+    else if(bookLoader.getCurrentBook()->getCurrentPage() ==0){
 
         return;
 
