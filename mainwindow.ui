@@ -13,6 +13,78 @@
   <property name="windowTitle">
    <string>MainWindow</string>
   </property>
+  <property name="autoFillBackground">
+   <bool>false</bool>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">QSplitter{
+	background-color: white;
+}
+
+QTabWidget::pane { /* The tab widget frame */
+	border-top: none;
+}
+
+/* Style the tab using the tab sub-control. Note that it reads QTabBar _not_ QTabWidget */
+QTabBar::tab {
+	background: white;
+	min-width: 8ex;
+	padding: 2px;
+
+}
+
+QTabWidget::tab-bar {
+    alignment: left;
+	background-color: white;
+}
+
+QTabBar::tab:selected{
+	
+	background-color: #FEBD8D;
+}
+
+QWidget#tab{
+	background-color: rgb(254, 189, 141);
+}
+
+QWidget#tab_2{
+	background-color: rgb(254, 189, 141);
+}
+
+QListWidget{
+	background-color: white;
+	border: none;
+	padding: 5px;
+	border-radius: 5px;
+	color: rgb(20, 20, 20);
+}
+
+
+
+QLabel{
+	color: rgb(20, 20, 20);
+}
+
+QPushButton{
+	background-color: white;
+	border: none;
+	padding: 5px;
+	border-radius: 5px;
+	color: rgb(20, 20, 20);
+}
+
+QPushButton:pressed{
+	background-color: rgb(221, 221, 221);
+}
+
+QLineEdit{
+	background-color: white;
+	border: none;
+	padding: 5px;
+	border-radius: 5px;
+	color: rgb(20, 20, 20);
+}</string>
+  </property>
   <widget class="QWidget" name="centralWidget">
    <property name="styleSheet">
     <string notr="true"/>
@@ -29,6 +101,9 @@
          <horstretch>0</horstretch>
          <verstretch>10</verstretch>
         </sizepolicy>
+       </property>
+       <property name="styleSheet">
+        <string notr="true"/>
        </property>
        <property name="orientation">
         <enum>Qt::Horizontal</enum>
@@ -81,28 +156,55 @@
              <layout class="QHBoxLayout" name="horizontalLayout_2">
               <item>
                <widget class="QPushButton" name="zoomInButton">
+                <property name="autoFillBackground">
+                 <bool>false</bool>
+                </property>
+                <property name="styleSheet">
+                 <string notr="true"/>
+                </property>
                 <property name="text">
                  <string>+</string>
                 </property>
                 <property name="shortcut">
                  <string>=</string>
                 </property>
+                <property name="flat">
+                 <bool>false</bool>
+                </property>
                </widget>
               </item>
               <item>
                <widget class="QPushButton" name="zoomResetButton">
+                <property name="autoFillBackground">
+                 <bool>false</bool>
+                </property>
+                <property name="styleSheet">
+                 <string notr="true"/>
+                </property>
                 <property name="text">
                  <string>Reset</string>
+                </property>
+                <property name="flat">
+                 <bool>false</bool>
                 </property>
                </widget>
               </item>
               <item>
                <widget class="QPushButton" name="zoomOutButton">
+                <property name="autoFillBackground">
+                 <bool>false</bool>
+                </property>
+                <property name="styleSheet">
+                 <string notr="true"/>
+                </property>
                 <property name="text">
                  <string>-</string>
                 </property>
                 <property name="shortcut">
                  <string>-</string>
+                </property>
+                <property name="flat">
+                 <bool>false</bool>
                 </property>
                </widget>
               </item>
@@ -123,11 +225,8 @@
             </item>
             <item>
              <widget class="QLabel" name="pageLabel">
-              <property name="styleSheet">
-               <string notr="true"/>
-              </property>
               <property name="text">
-               <string/>
+               <string>No Manga Selected</string>
               </property>
               <property name="alignment">
                <set>Qt::AlignCenter</set>
@@ -138,39 +237,44 @@
              <layout class="QHBoxLayout" name="horizontalLayout">
               <item>
                <widget class="QPushButton" name="pageJumpButton">
+                <property name="sizePolicy">
+                 <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                  <horstretch>0</horstretch>
+                  <verstretch>0</verstretch>
+                 </sizepolicy>
+                </property>
+                <property name="autoFillBackground">
+                 <bool>false</bool>
+                </property>
+                <property name="styleSheet">
+                 <string notr="true"/>
+                </property>
                 <property name="text">
                  <string>Jump To Page</string>
+                </property>
+                <property name="flat">
+                 <bool>false</bool>
                 </property>
                </widget>
               </item>
               <item>
                <widget class="QLineEdit" name="pageJumpLineEdit">
                 <property name="sizePolicy">
-                 <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+                 <sizepolicy hsizetype="Maximum" vsizetype="Fixed">
                   <horstretch>0</horstretch>
                   <verstretch>0</verstretch>
                  </sizepolicy>
                 </property>
                 <property name="maximumSize">
                  <size>
-                  <width>50</width>
+                  <width>999999</width>
                   <height>16777215</height>
                  </size>
                 </property>
+                <property name="styleSheet">
+                 <string notr="true"/>
+                </property>
                </widget>
-              </item>
-              <item>
-               <spacer name="horizontalSpacer">
-                <property name="orientation">
-                 <enum>Qt::Horizontal</enum>
-                </property>
-                <property name="sizeHint" stdset="0">
-                 <size>
-                  <width>40</width>
-                  <height>20</height>
-                 </size>
-                </property>
-               </spacer>
               </item>
              </layout>
             </item>
@@ -178,15 +282,33 @@
              <layout class="QHBoxLayout" name="horizontalLayout_5">
               <item>
                <widget class="QPushButton" name="firstPageButton">
+                <property name="autoFillBackground">
+                 <bool>false</bool>
+                </property>
+                <property name="styleSheet">
+                 <string notr="true"/>
+                </property>
                 <property name="text">
                  <string>First Page</string>
+                </property>
+                <property name="flat">
+                 <bool>false</bool>
                 </property>
                </widget>
               </item>
               <item>
                <widget class="QPushButton" name="lastPageButton">
+                <property name="autoFillBackground">
+                 <bool>false</bool>
+                </property>
+                <property name="styleSheet">
+                 <string notr="true"/>
+                </property>
                 <property name="text">
                  <string>Last Page</string>
+                </property>
+                <property name="flat">
+                 <bool>false</bool>
                 </property>
                </widget>
               </item>
@@ -196,21 +318,39 @@
              <layout class="QHBoxLayout" name="horizontalLayout_4">
               <item>
                <widget class="QPushButton" name="previousPageButton">
+                <property name="autoFillBackground">
+                 <bool>false</bool>
+                </property>
+                <property name="styleSheet">
+                 <string notr="true"/>
+                </property>
                 <property name="text">
                  <string>Previous Page</string>
                 </property>
                 <property name="shortcut">
                  <string>Left</string>
                 </property>
+                <property name="flat">
+                 <bool>false</bool>
+                </property>
                </widget>
               </item>
               <item>
                <widget class="QPushButton" name="nextPageButton">
+                <property name="autoFillBackground">
+                 <bool>false</bool>
+                </property>
+                <property name="styleSheet">
+                 <string notr="true"/>
+                </property>
                 <property name="text">
                  <string>Next Page</string>
                 </property>
                 <property name="shortcut">
                  <string>Right</string>
+                </property>
+                <property name="flat">
+                 <bool>false</bool>
                 </property>
                </widget>
               </item>

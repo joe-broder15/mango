@@ -144,6 +144,8 @@ void MainWindow::on_deleteMangaButton_clicked()
     //Reload
     reloadMangaList();
 
+
+
 }
 
 //Next Page

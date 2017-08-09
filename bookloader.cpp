@@ -227,10 +227,13 @@ void BookLoader::loadBooks(){
             tempPath = line;
 
         } else if (count == 4){
-            tempBookMark = line.toInt();
-            Book newBook(tempBookNumber, tempPath, tempSeries);
-            newBook.setBookMark(tempBookMark);
-            books.push_back(newBook);
+
+            if(QDir(tempPath).exists()){
+                tempBookMark = line.toInt();
+                Book newBook(tempBookNumber, tempPath, tempSeries);
+                newBook.setBookMark(tempBookMark);
+                books.push_back(newBook);
+            }
         }
 
         count++;
