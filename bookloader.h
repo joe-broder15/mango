@@ -9,6 +9,8 @@ class BookLoader
 {
 public:
 
+    BookLoader();
+
     //Get Book methods
     Book* getBook(int index);
     Book* getBook(QString SeriesName, int BookNumber);

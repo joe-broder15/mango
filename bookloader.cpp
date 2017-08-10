@@ -13,6 +13,11 @@
 #include <QCoreApplication>
 using namespace std;
 
+BookLoader::BookLoader(){
+  currentBook = new Book();
+}
+
+
 //Get book for index
 Book* BookLoader::getBook(int index){
 
